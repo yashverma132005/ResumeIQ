@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ultimate B.Tech Resume Guide — ResumeIQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="nav-logo">Resume<span>IQ</span></a>
+  <div class="nav-links">
+    <a href="/" class="nav-link">Analyzer</a>
+    <a href="/guide" class="nav-link nav-link-active">Resume Guide</a>
+  </div>
+</nav>
+
+<div class="guide-layout">
+
+  <!-- SIDEBAR TOC -->
+  <aside class="guide-toc">
+    <p class="toc-label">On this page</p>
+    <ul class="toc-list">
+      <li><a href="#why" class="toc-item">Why resumes get rejected</a></li>
+      <li><a href="#structure" class="toc-item">The ideal structure</a></li>
+      <li><a href="#sections" class="toc-item">Writing each section</a></li>
+      <li><a href="#ats" class="toc-item">ATS optimization</a></li>
+      <li><a href="#bullets" class="toc-item">Writing strong bullets</a></li>
+      <li><a href="#mistakes" class="toc-item">Common mistakes</a></li>
+      <li><a href="#checklist" class="toc-item">Final checklist</a></li>
+      <li><a href="#templates" class="toc-item">Role-specific tips</a></li>
+    </ul>
+    <a href="/" class="toc-cta">Analyze your resume →</a>
+  </aside>
+
+  <!-- GUIDE CONTENT -->
+  <article class="guide-content">
+
+    <div class="guide-hero">
+      <span class="guide-badge">Student Edition</span>
+      <h1 class="guide-title">The Ultimate B.Tech<br><em>Resume Guide</em></h1>
+      <p class="guide-intro">Everything you need to know to write a resume that passes ATS filters, impresses recruiters, and lands you interviews — written specifically for engineering students.</p>
+    </div>
+
+    <section class="guide-section" id="why">
+      <h2>Why most student resumes get rejected</h2>
+      <p>Over 75% of resumes are rejected before a human ever reads them — by Applicant Tracking Systems (ATS). Even well-written resumes fail because of formatting, missing keywords, or the wrong structure. Here's what recruiters at top companies actually see:</p>
+
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-num">6 sec</div>
+          <div class="stat-desc">Average recruiter reading time per resume</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">75%</div>
+          <div class="stat-desc">Resumes filtered by ATS before human review</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">40%</div>
+          <div class="stat-desc">Of rejections are due to irrelevant keywords</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section" id="structure">
+      <h2>The ideal resume structure for B.Tech students</h2>
+      <p>For freshers and students with under 2 years of experience, this is the order that works best:</p>
+
+      <div class="structure-list">
+        <div class="structure-item">
+          <div class="structure-num">1</div>
+          <div>
+            <strong>Contact Information</strong>
+            <p>Name, phone, email, LinkedIn, GitHub (never home address)</p>
+          </div>
+        </div>
+        <div class="structure-item">
+          <div class="structure-num">2</div>
+          <div>
+            <strong>Professional Summary</strong> <span class="optional-tag">optional but recommended</span>
+            <p>2–3 lines summarizing who you are and what you're looking for</p>
+          </div>
+        </div>
+        <div class="structure-item">
+          <div class="structure-num">3</div>
+          <div>
+            <strong>Education</strong>
+            <p>Degree, college, CGPA (if above 7.0), graduation year</p>
+          </div>
+        </div>
+        <div class="structure-item">
+          <div class="structure-num">4</div>
+          <div>
+            <strong>Skills</strong>
+            <p>Technical skills grouped by category — not a wall of text</p>
+          </div>
+        </div>
+        <div class="structure-item">
+          <div class="structure-num">5</div>
+          <div>
+            <strong>Projects</strong> <span class="important-tag">most important for freshers</span>
+            <p>2–4 projects with tech stack, links, and measurable outcomes</p>
+          </div>
+        </div>
+        <div class="structure-item">
+          <div class="structure-num">6</div>
+          <div>
+            <strong>Experience / Internships</strong>
+            <p>Any internships, part-time roles, or freelance work</p>
+          </div>
+        </div>
+        <div class="structure-item">
+          <div class="structure-num">7</div>
+          <div>
+            <strong>Certifications</strong>
+            <p>Coursera, Google, AWS, HackerRank, LeetCode badges</p>
+          </div>
+        </div>
+        <div class="structure-item">
+          <div class="structure-num">8</div>
+          <div>
+            <strong>Achievements / Activities</strong> <span class="optional-tag">optional</span>
+            <p>Hackathons, coding contests, open source contributions</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section" id="sections">
+      <h2>Writing each section</h2>
+
+      <h3>Contact Information</h3>
+      <div class="do-dont">
+        <div class="do-box">
+          <p class="box-label box-label-green">✓ Do</p>
+          <ul>
+            <li>Use a professional email (firstname.lastname@gmail.com)</li>
+            <li>Include LinkedIn and GitHub URLs</li>
+            <li>Add your city and state (not full address)</li>
+          </ul>
+        </div>
+        <div class="dont-box">
+          <p class="box-label box-label-red">✗ Don't</p>
+          <ul>
+            <li>Use unprofessional emails (coolguy123@)</li>
+            <li>Include date of birth, religion, or photo</li>
+            <li>Use a phone number without country code for international roles</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Education Section</h3>
+      <div class="example-box">
+        <p class="example-label">Example</p>
+        <p><strong>B.Tech in Computer Science</strong> — Delhi Technological University</p>
+        <p>2021–2025 &nbsp;·&nbsp; CGPA: 8.4/10</p>
+        <p style="color:#6b7280; font-size:0.9rem; margin-top:0.5rem;">Relevant coursework: Data Structures, DBMS, Operating Systems, Machine Learning</p>
+      </div>
+
+      <h3>Skills Section</h3>
+      <p>Group skills into categories — ATS reads these much better than a comma-separated list:</p>
+      <div class="example-box">
+        <p class="example-label">Example</p>
+        <p><strong>Languages:</strong> Python, JavaScript, Java, SQL</p>
+        <p><strong>Frameworks:</strong> React, Django, Flask, Node.js</p>
+        <p><strong>Tools:</strong> Git, Docker, VS Code, Postman, Linux</p>
+        <p><strong>Databases:</strong> PostgreSQL, MongoDB, Redis</p>
+      </div>
+
+      <h3>Projects Section</h3>
+      <p>This is the most important section for freshers. Use this format for each project:</p>
+      <div class="example-box">
+        <p class="example-label">Example</p>
+        <p><strong>E-Commerce Web App</strong> &nbsp;·&nbsp; <a href="#">GitHub</a> &nbsp;·&nbsp; <a href="#">Live Demo</a></p>
+        <p style="color:#6b7280; font-size:0.85rem;">React · Node.js · MongoDB · JWT Auth</p>
+        <ul style="margin-top:0.5rem;">
+          <li>Built a full-stack e-commerce platform with cart, checkout, and payment integration</li>
+          <li>Reduced API response time by 40% using Redis caching and query optimization</li>
+          <li>Deployed on AWS EC2 with CI/CD pipeline; handled 200+ concurrent users in testing</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="guide-section" id="ats">
+      <h2>ATS optimization essentials</h2>
+
+      <div class="tip-grid">
+        <div class="tip-card tip-do">
+          <h4>Use standard fonts</h4>
+          <p>Calibri, Arial, Times New Roman — ATS can't read fancy fonts reliably</p>
+        </div>
+        <div class="tip-card tip-do">
+          <h4>Use standard section headings</h4>
+          <p>"Experience" not "Where I've Worked" — ATS looks for exact keywords</p>
+        </div>
+        <div class="tip-card tip-do">
+          <h4>Use both versions of skill names</h4>
+          <p>Write "Node.js (Node)" or "Machine Learning (ML)" to catch both variants</p>
+        </div>
+        <div class="tip-card tip-dont">
+          <h4>Avoid tables and columns</h4>
+          <p>Multi-column layouts confuse ATS parsers — use single column</p>
+        </div>
+        <div class="tip-card tip-dont">
+          <h4>No headers/footers for key info</h4>
+          <p>ATS often can't read content in page headers or footers</p>
+        </div>
+        <div class="tip-card tip-dont">
+          <h4>No images or icons</h4>
+          <p>Skill bars, profile photos, icons — ATS ignores all of these</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section" id="bullets">
+      <h2>Writing strong bullet points</h2>
+      <p>Every bullet should follow the <strong>Action → Task → Result</strong> formula. Use a strong action verb, describe what you did, and quantify the result.</p>
+
+      <div class="bullet-examples">
+        <div class="bullet-bad">
+          <span class="bullet-tag bullet-tag-bad">Weak</span>
+          <p>"Worked on the backend of the app"</p>
+        </div>
+        <div class="bullet-arrow">→</div>
+        <div class="bullet-good">
+          <span class="bullet-tag bullet-tag-good">Strong</span>
+          <p>"Built RESTful APIs in Django serving 10,000+ daily requests, reducing average response time by 35% through query optimization"</p>
+        </div>
+      </div>
+
+      <div class="bullet-examples">
+        <div class="bullet-bad">
+          <span class="bullet-tag bullet-tag-bad">Weak</span>
+          <p>"Made the website faster"</p>
+        </div>
+        <div class="bullet-arrow">→</div>
+        <div class="bullet-good">
+          <span class="bullet-tag bullet-tag-good">Strong</span>
+          <p>"Improved website Lighthouse performance score from 62 to 94 by implementing lazy loading, image compression, and code splitting"</p>
+        </div>
+      </div>
+
+      <h3>Strong action verbs by category</h3>
+      <div class="verb-grid">
+        <div class="verb-group">
+          <p class="verb-category">Built / Created</p>
+          <p>Architected, Developed, Engineered, Implemented, Designed, Deployed, Launched</p>
+        </div>
+        <div class="verb-group">
+          <p class="verb-category">Improved</p>
+          <p>Optimized, Reduced, Accelerated, Increased, Enhanced, Streamlined, Automated</p>
+        </div>
+        <div class="verb-group">
+          <p class="verb-category">Led / Collaborated</p>
+          <p>Spearheaded, Coordinated, Mentored, Collaborated, Contributed, Partnered</p>
+        </div>
+        <div class="verb-group">
+          <p class="verb-category">Analyzed</p>
+          <p>Researched, Evaluated, Identified, Diagnosed, Investigated, Benchmarked</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section" id="mistakes">
+      <h2>10 common mistakes to avoid</h2>
+      <ol class="mistake-list">
+        <li><strong>Objective statements</strong> — Replace with a short professional summary</li>
+        <li><strong>Responsibilities instead of achievements</strong> — What you did vs. what you accomplished</li>
+        <li><strong>No GitHub/portfolio link</strong> — Essential for tech roles in 2024</li>
+        <li><strong>"References available on request"</strong> — Wastes space; everyone assumes this</li>
+        <li><strong>Irrelevant personal info</strong> — Hobbies like "cooking" don't belong unless relevant</li>
+        <li><strong>Poor formatting inconsistency</strong> — Mixed fonts, sizes, bullet styles</li>
+        <li><strong>Lying about skills</strong> — You will be asked in interviews; only list what you know</li>
+        <li><strong>One resume for all jobs</strong> — Tailor your resume per JD for better match scores</li>
+        <li><strong>Spelling and grammar errors</strong> — Instant rejection signal</li>
+        <li><strong>Exceeding 1 page as a fresher</strong> — Keep it to 1 page until 3+ years experience</li>
+      </ol>
+    </section>
+
+    <section class="guide-section" id="checklist">
+      <h2>Final checklist before applying</h2>
+      <div class="checklist">
+        <label class="check-item"><input type="checkbox"> Resume is saved as PDF</label>
+        <label class="check-item"><input type="checkbox"> File is named "FirstName_LastName_Resume.pdf"</label>
+        <label class="check-item"><input type="checkbox"> Contact info is correct (email, phone, LinkedIn)</label>
+        <label class="check-item"><input type="checkbox"> No spelling or grammatical errors</label>
+        <label class="check-item"><input type="checkbox"> All bullet points have measurable results</label>
+        <label class="check-item"><input type="checkbox"> GitHub links work and repos are public</label>
+        <label class="check-item"><input type="checkbox"> Skills match the job description keywords</label>
+        <label class="check-item"><input type="checkbox"> Resume is 1 page (fresher) or max 2 pages</label>
+        <label class="check-item"><input type="checkbox"> No tables, columns, or icons</label>
+        <label class="check-item"><input type="checkbox"> Run through ResumeIQ analyzer ✓</label>
+      </div>
+    </section>
+
+    <section class="guide-section" id="templates">
+      <h2>Role-specific tips</h2>
+
+      <div class="role-tips-grid">
+        <div class="role-tip-card">
+          <h4>Frontend Developer</h4>
+          <ul>
+            <li>Showcase deployed projects with live URLs</li>
+            <li>Mention performance metrics (Lighthouse scores)</li>
+            <li>Highlight UI/UX sensibility if you have it</li>
+            <li>List design tools (Figma) as a bonus</li>
+          </ul>
+        </div>
+        <div class="role-tip-card">
+          <h4>Backend Developer</h4>
+          <ul>
+            <li>Mention database design experience</li>
+            <li>Highlight API design and documentation</li>
+            <li>Any deployment/cloud experience is a big plus</li>
+            <li>Scalability and performance numbers shine</li>
+          </ul>
+        </div>
+        <div class="role-tip-card">
+          <h4>Data Scientist / ML</h4>
+          <ul>
+            <li>Link to Kaggle profile or model accuracy results</li>
+            <li>Mention datasets size (e.g., "trained on 500K records")</li>
+            <li>List paper readings or research if applicable</li>
+            <li>Include Jupyter notebooks on GitHub</li>
+          </ul>
+        </div>
+        <div class="role-tip-card">
+          <h4>Full Stack Developer</h4>
+          <ul>
+            <li>Show end-to-end project ownership</li>
+            <li>Mention both frontend and backend stack per project</li>
+            <li>DevOps / deployment experience is a differentiator</li>
+            <li>Contributions to open-source boost credibility</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="guide-cta">
+      <h3>Ready to put this into practice?</h3>
+      <p>Run your resume through ResumeIQ and get a personalized score, skill gap analysis, and roadmap in seconds.</p>
+      <a href="/" class="btn-analyze">Analyze my resume</a>
+    </div>
+
+  </article>
+</div>
+
+<footer class="footer">
+  <p>ResumeIQ &nbsp;·&nbsp; Built for B.Tech students &nbsp;·&nbsp; <a href="/guide">Resume Guide</a></p>
+</footer>
+
+</body>
+</html>

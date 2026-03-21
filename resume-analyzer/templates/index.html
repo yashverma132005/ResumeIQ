@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResumeIQ — Smart Resume Analyzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="nav-logo">Resume<span>IQ</span></a>
+  <div class="nav-links">
+    <a href="/guide" class="nav-link">Resume Guide</a>
+    <a href="#how" class="nav-link">How it works</a>
+  </div>
+</nav>
+
+{% if not result %}
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-badge">✦ AI-Powered &nbsp;·&nbsp; ATS Optimized &nbsp;·&nbsp; Free</div>
+  <h1 class="hero-title">Know exactly what's<br><em>missing</em> in your resume</h1>
+  <p class="hero-sub">Upload your resume, pick a job role, and get a detailed ATS score, skill gap analysis, and a personalized 3-month improvement roadmap.</p>
+
+  <div class="hero-stats">
+    <div class="stat-item"><strong>8</strong> job roles</div>
+    <div class="stat-divider"></div>
+    <div class="stat-item"><strong>AI</strong> insights</div>
+    <div class="stat-divider"></div>
+    <div class="stat-item"><strong>ATS</strong> check</div>
+    <div class="stat-divider"></div>
+    <div class="stat-item"><strong>Free</strong> forever</div>
+  </div>
+</section>
+{% endif %}
+
+<div class="main-layout {% if result %}results-mode{% endif %}">
+
+  <!-- UPLOAD PANEL -->
+  <div class="upload-panel {% if result %}upload-panel--compact{% endif %}">
+    {% if not result %}
+    <h2 class="panel-heading">Analyze your resume</h2>
+    {% endif %}
+
+    <form action="/analyze" method="POST" enctype="multipart/form-data" id="analyzeForm">
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-icon">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 16V4m0 0L8 8m4-4 4 4"/><path d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1"/></svg>
+        </div>
+        <p class="drop-title">Drop your resume here</p>
+        <p class="drop-sub">PDF or DOCX &nbsp;·&nbsp; Max 5MB</p>
+        <span class="drop-filename" id="fileName"></span>
+      </div>
+      <input type="file" name="resume" id="resumeInput" accept=".pdf,.docx" hidden required>
+
+      <select name="job_role" required class="form-select">
+        <option value="" disabled selected>Select target role</option>
+        <option value="frontend">Frontend Developer</option>
+        <option value="backend">Backend Developer</option>
+        <option value="fullstack">Full Stack Developer</option>
+        <option value="data">Data Scientist</option>
+        <option value="ml">ML Engineer</option>
+        <option value="devops">DevOps Engineer</option>
+        <option value="mobile">Mobile Developer</option>
+      </select>
+
+      <div class="jd-toggle">
+        <button type="button" class="jd-toggle-btn" id="jdToggle">+ Add Job Description (optional)</button>
+      </div>
+      <textarea name="jd" id="jdArea" placeholder="Paste the job description here to get a keyword match score..." class="form-textarea jd-hidden"></textarea>
+
+      <button type="submit" class="btn-analyze" id="submitBtn">
+        <span id="btnText">Analyze Resume</span>
+        <span id="btnLoader" class="hidden">Analyzing...</span>
+      </button>
+    </form>
+
+    {% if result %}
+    <a href="/" class="btn-reset">← Analyze another resume</a>
+    {% endif %}
+  </div>
+
+  <!-- RESULTS PANEL -->
+  {% if result %}
+  <div class="results-panel">
+
+    <!-- SCORE OVERVIEW -->
+    <div class="result-section score-overview">
+      <div class="score-circle-wrap">
+        <svg class="score-ring" width="130" height="130" viewBox="0 0 130 130">
+          <circle cx="65" cy="65" r="55" fill="none" stroke="#f0ede8" stroke-width="10"/>
+          <circle cx="65" cy="65" r="55" fill="none"
+            stroke="{% if result.score >= 75 %}#2a6b3c{% elif result.score >= 50 %}#b45309{% else %}#b91c1c{% endif %}"
+            stroke-width="10" stroke-linecap="round"
+            stroke-dasharray="{{ (result.score / 100) * 345.4 }} 345.4"
+            stroke-dashoffset="86.35"
+            transform="rotate(-90 65 65)"/>
+        </svg>
+        <div class="score-text">
+          <strong>{{ result.score }}%</strong>
+          <span>overall</span>
+        </div>
+      </div>
+
+      <div class="score-meta">
+        <h2 class="score-headline">
+          {% if result.score >= 75 %}Strong resume!
+          {% elif result.score >= 50 %}Good start
+          {% else %}Needs work
+          {% endif %}
+        </h2>
+        {% if result.ai_insights %}
+        <p class="score-insight">{{ result.ai_insights.headline_feedback }}</p>
+        {% endif %}
+
+        <div class="score-pills">
+          <div class="score-pill {% if result.ats_score >= 80 %}pill-green{% elif result.ats_score >= 60 %}pill-amber{% else %}pill-red{% endif %}">
+            ATS {{ result.ats_score }}%
+          </div>
+          {% if result.jd_score is not none %}
+          <div class="score-pill {% if result.jd_score >= 60 %}pill-green{% elif result.jd_score >= 40 %}pill-amber{% else %}pill-red{% endif %}">
+            JD Match {{ result.jd_score }}%
+          </div>
+          {% endif %}
+          <div class="score-pill pill-blue">
+            {{ result.word_count }} words
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!----------------- TAB NAVIGATION ----------------->
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="skills">Skills</button>
+      <button class="tab-btn" data-tab="ats">ATS Check</button>
+      {% if result.jd_score is not none %}<button class="tab-btn" data-tab="jd">JD Match</button>{% endif %}
+      <button class="tab-btn" data-tab="roadmap">Roadmap</button>
+      {% if result.ai_insights %}<button class="tab-btn" data-tab="ai">AI Insights</button>{% endif %}
+    </div>
+
+    <!--------------- TAB: SKILLS -------------------->
+    <div class="tab-content active" id="tab-skills">
+      <div class="result-section">
+        <h3 class="section-title">Core skills <span class="badge badge-green">{{ result.core_detected|length }} found</span></h3>
+        <div class="tag-group">
+          {% for s in result.core_detected %}<span class="tag tag-green">✓ {{ s }}</span>{% endfor %}
+          {% for s in result.core_missing %}<span class="tag tag-red">✗ {{ s }}</span>{% endfor %}
+        </div>
+      </div>
+
+      <div class="result-section">
+        <h3 class="section-title">Tools & additional skills</h3>
+        <div class="tag-group">
+          {% for s in result.detected if s not in result.core_detected %}<span class="tag tag-green">✓ {{ s }}</span>{% endfor %}
+          {% for s in result.missing if s not in result.core_missing %}<span class="tag tag-gray">{{ s }}</span>{% endfor %}
+        </div>
+      </div>
+
+      <div class="result-section">
+        <h3 class="section-title">Resume sections</h3>
+        <div class="section-grid">
+          {% for s in ['education','experience','projects','skills','certifications','achievements','summary','contact'] %}
+          <div class="section-chip {% if s in result.sections_found %}chip-found{% else %}chip-missing{% endif %}">
+            <span class="chip-icon">{% if s in result.sections_found %}✓{% else %}✗{% endif %}</span>
+            {{ s.capitalize() }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!------------------ TAB: ATS ------------------->
+    <div class="tab-content" id="tab-ats">
+      <div class="result-section">
+        <div class="ats-header">
+          <div>
+            <h3 class="section-title">ATS Compatibility Score</h3>
+            <p class="section-sub">How well automated screening systems can read your resume</p>
+          </div>
+          <div class="ats-score-big {% if result.ats_score >= 80 %}text-green{% elif result.ats_score >= 60 %}text-amber{% else %}text-red{% endif %}">
+            {{ result.ats_score }}%
+          </div>
+        </div>
+
+        <div class="ats-bar">
+          <div class="ats-bar-fill" style="width: {{ result.ats_score }}%; background: {% if result.ats_score >= 80 %}#2a6b3c{% elif result.ats_score >= 60 %}#b45309{% else %}#b91c1c{% endif %};"></div>
+        </div>
+
+        {% if result.ats_warnings %}
+        <div class="issue-list">
+          <h4 class="issue-heading">Issues to fix</h4>
+          {% for w in result.ats_warnings %}
+          <div class="issue-item issue-warn">
+            <span class="issue-dot"></span>{{ w }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if result.ats_info %}
+        <div class="issue-list">
+          <h4 class="issue-heading">What's working</h4>
+          {% for i in result.ats_info %}
+          <div class="issue-item issue-ok">
+            <span class="issue-dot issue-dot-green"></span>{{ i }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-------------- TAB: JD MATCH ---------------------->
+    {% if result.jd_score is not none %}
+    <div class="tab-content" id="tab-jd">
+      <div class="result-section">
+        <div class="jd-match-header">
+          <div>
+            <h3 class="section-title">Job Description Match</h3>
+            <p class="section-sub">Keywords from the JD found in your resume</p>
+          </div>
+          <div class="ats-score-big {% if result.jd_score >= 60 %}text-green{% elif result.jd_score >= 40 %}text-amber{% else %}text-red{% endif %}">
+            {{ result.jd_score }}%
+          </div>
+        </div>
+
+        <div class="ats-bar">
+          <div class="ats-bar-fill" style="width: {{ result.jd_score }}%; background: {% if result.jd_score >= 60 %}#2a6b3c{% elif result.jd_score >= 40 %}#b45309{% else %}#b91c1c{% endif %};"></div>
+        </div>
+
+        <h4 class="kw-heading">Matched keywords</h4>
+        <div class="tag-group">{% for k in result.jd_matched %}<span class="tag tag-green">✓ {{ k }}</span>{% endfor %}</div>
+
+        <h4 class="kw-heading" style="margin-top:1.25rem;">Missing keywords — add these to your resume</h4>
+        <div class="tag-group">{% for k in result.jd_missing %}<span class="tag tag-red">{{ k }}</span>{% endfor %}</div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!----------------- TAB: ROADMAP ---------------------->
+    <div class="tab-content" id="tab-roadmap">
+      <div class="result-section">
+        <h3 class="section-title">Your 3-month improvement roadmap</h3>
+        <p class="section-sub">A step-by-step plan to make your resume job-ready</p>
+
+        {% if result.ai_insights and result.ai_insights.roadmap %}
+        <div class="roadmap">
+          {% for item in result.ai_insights.roadmap %}
+          <div class="roadmap-item">
+            <div class="roadmap-marker">
+              <div class="roadmap-dot"></div>
+              {% if not loop.last %}<div class="roadmap-line"></div>{% endif %}
+            </div>
+            <div class="roadmap-content">
+              <div class="roadmap-week">{{ item.week }}</div>
+              <div class="roadmap-title">{{ item.title }}</div>
+              <ul class="roadmap-tasks">
+                {% for task in item.tasks %}<li>{{ task }}</li>{% endfor %}
+              </ul>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="roadmap">
+          <div class="roadmap-item">
+            <div class="roadmap-marker"><div class="roadmap-dot"></div><div class="roadmap-line"></div></div>
+            <div class="roadmap-content">
+              <div class="roadmap-week">Week 1–2</div>
+              <div class="roadmap-title">Fix the fundamentals</div>
+              <ul class="roadmap-tasks">
+                <li>Add missing sections: {{ result.sections_missing[:3]|join(', ') or 'all present' }}</li>
+                <li>Fix ATS warnings from the ATS tab</li>
+                <li>Add quantified results to bullet points</li>
+              </ul>
+            </div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-marker"><div class="roadmap-dot"></div><div class="roadmap-line"></div></div>
+            <div class="roadmap-content">
+              <div class="roadmap-week">Week 3–4</div>
+              <div class="roadmap-title">Build missing skills</div>
+              <ul class="roadmap-tasks">
+                <li>Learn: {{ result.core_missing[:3]|join(', ') or 'advance existing skills' }}</li>
+                <li>Complete one online certification</li>
+                <li>Update skills section with new tools</li>
+              </ul>
+            </div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-marker"><div class="roadmap-dot"></div><div class="roadmap-line"></div></div>
+            <div class="roadmap-content">
+              <div class="roadmap-week">Month 2</div>
+              <div class="roadmap-title">Build your portfolio</div>
+              <ul class="roadmap-tasks">
+                <li>Create 2 projects using skills you just learned</li>
+                <li>Push projects to GitHub with READMEs</li>
+                <li>Add project section to resume with impact metrics</li>
+              </ul>
+            </div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-marker"><div class="roadmap-dot"></div></div>
+            <div class="roadmap-content">
+              <div class="roadmap-week">Month 3</div>
+              <div class="roadmap-title">Ready to apply</div>
+              <ul class="roadmap-tasks">
+                <li>Tailor resume for each JD using the JD Match tool</li>
+                <li>Get 2 peer reviews of your resume</li>
+                <li>Start applying to 5 companies per week</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        <a href="/guide" class="btn-guide">Read the full student resume guide →</a>
+      </div>
+    </div>
+
+    <!-------------------------- TAB: AI INSIGHTS ------------------->
+    {% if result.ai_insights %}
+    <div class="tab-content" id="tab-ai">
+      <div class="result-section">
+
+        {% if result.ai_insights.critical_fixes %}
+        <h3 class="section-title">Critical fixes <span class="badge badge-red">{{ result.ai_insights.critical_fixes|length }}</span></h3>
+        <ul class="insight-list insight-list-red">
+          {% for fix in result.ai_insights.critical_fixes %}<li>{{ fix }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if result.ai_insights.quick_wins %}
+        <h3 class="section-title" style="margin-top:1.5rem;">Quick wins</h3>
+        <ul class="insight-list insight-list-green">
+          {% for win in result.ai_insights.quick_wins %}<li>{{ win }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if result.ai_insights.rewrite_tip %}
+        <div class="rewrite-box">
+          <h4 class="rewrite-label">Bullet point rewrite example</h4>
+          <p class="rewrite-text">{{ result.ai_insights.rewrite_tip }}</p>
+        </div>
+        {% endif %}
+
+        {% if result.ai_insights.interview_angle %}
+        <div class="interview-box">
+          <h4 class="interview-label">Your unique angle</h4>
+          <p>{{ result.ai_insights.interview_angle }}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+  {% endif %}
+</div>
+
+{% if not result %}
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <h2 class="how-title">How it works</h2>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">01</div>
+      <h3>Upload your resume</h3>
+      <p>PDF or DOCX. We extract and analyze all text content instantly.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">02</div>
+      <h3>Pick your target role</h3>
+      <p>Choose from 7 tech roles. Optionally paste the job description for a precise keyword match.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">03</div>
+      <h3>Get your analysis</h3>
+      <p>Receive an ATS score, skill gap report, AI feedback, and a personalized roadmap.</p>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<footer class="footer">
+  <p>ResumeIQ &nbsp;·&nbsp; Built for B.Tech students &nbsp;·&nbsp; <a href="/guide">Resume Guide</a></p>
+</footer>
+
+<script>
+const drop = document.getElementById("dropZone");
+const input = document.getElementById("resumeInput");
+const fname = document.getElementById("fileName");
+const form = document.getElementById("analyzeForm");
+const btnText = document.getElementById("btnText");
+const btnLoader = document.getElementById("btnLoader");
+const jdToggle = document.getElementById("jdToggle");
+const jdArea = document.getElementById("jdArea");
+
+if(drop) {
+  drop.onclick = () => input.click();
+  drop.ondragover = e => { e.preventDefault(); drop.classList.add("dragover"); };
+  drop.ondragleave = () => drop.classList.remove("dragover");
+  drop.ondrop = e => {
+    e.preventDefault(); drop.classList.remove("dragover");
+    input.files = e.dataTransfer.files;
+    fname.textContent = e.dataTransfer.files[0].name;
+    drop.classList.add("has-file");
+  };
+  input.onchange = () => {
+    fname.textContent = input.files[0].name;
+    drop.classList.add("has-file");
+  };
+}
+
+if(jdToggle) {
+  jdToggle.onclick = () => {
+    jdArea.classList.toggle("jd-hidden");
+    jdToggle.textContent = jdArea.classList.contains("jd-hidden") ? "+ Add Job Description (optional)" : "− Hide Job Description";
+  };
+}
+
+if(form) {
+  form.onsubmit = () => {
+    if(btnText) btnText.classList.add("hidden");
+    if(btnLoader) btnLoader.classList.remove("hidden");
+  };
+}
+
+// Tabs
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+    btn.classList.add("active");
+    const tab = document.getElementById("tab-" + btn.dataset.tab);
+    if(tab) tab.classList.add("active");
+  };
+});
+</script>
+</body>
+</html>
