@@ -25,3 +25,12 @@ ResumeIQ helps job seekers optimize their resumes by identifying missing keyword
 - Frontend: HTML, CSS, JavaScript
 - Backend: Python, Flask
 - Other Tools: NLP libraries for text analysis, Resume parsing logic
+
+🌐 Live Demo: 
+https://resumeiq-2-nmps.onrender.com/
+
+📌 Future Improvements: 
+- AI-powered resume rewriting suggestions
+- Resume builder with ATS-friendly templates
+- Job matching system
+- Multi-agent architecture for analysis
