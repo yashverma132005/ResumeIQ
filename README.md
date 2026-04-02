@@ -22,7 +22,7 @@ ResumeIQ helps job seekers optimize their resumes by identifying missing keyword
 - The user receives suggestions to improve ATS compatibility.
   
 🛠 Tech Stack: 
--> Frontend: 
+-- Frontend: 
 - HTML
 - CSS
 - JavaScript
