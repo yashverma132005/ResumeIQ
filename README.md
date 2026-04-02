@@ -21,15 +21,14 @@ ResumeIQ helps job seekers optimize their resumes by identifying missing keyword
 - The resume is compared with job requirements.
 - The user receives suggestions to improve ATS compatibility.
   
-🛠 Tech Stack: 
--- Frontend: 
+🛠 Tech Stack:
+1. Frontend: 
 - HTML
 - CSS
 - JavaScript
--> Backend:
+2. Backend:
 - Python
 - Flask
-Other Tools: 
+3. Other Tools: 
 - NLP libraries for text analysis
 - Resume parsing logic
-
