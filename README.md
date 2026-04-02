@@ -6,37 +6,30 @@ Many companies use ATS software to scan and filter resumes before recruiters rev
 
 ResumeIQ helps job seekers optimize their resumes by identifying missing keywords, formatting issues, and content gaps.
 
-🚀 Features
-Upload resume for instant analysis
-Keyword extraction from job descriptions
-ATS compatibility evaluation
-Resume structure and formatting checks
-Suggestions to improve resume quality
-Easy-to-use web interface
-🧠 How It Works
-User uploads a resume file.
-The system extracts text from the resume.
-Natural Language Processing (NLP) analyzes:
-skills
-keywords
-formatting
-The resume is compared with job requirements.
-The user receives suggestions to improve ATS compatibility.
-🛠 Tech Stack
+🚀 Features: 
+- Upload resume for instant analysis
+- Keyword extraction from job descriptions
+- ATS compatibility evaluation
+- Resume structure and formatting checks
+- Suggestions to improve resume quality
+- Easy-to-use web interface
 
-Frontend
-
-HTML
-CSS
-JavaScript
-
-Backend
-
-Python
-Flask
-
-Other Tools
-
-NLP libraries for text analysis
-Resume parsing logic
+🧠 How It Works:
+- User uploads a resume file.
+- The system extracts text from the resume.
+- Natural Language Processing (NLP) analyzes- skills, keywords and formatting
+- The resume is compared with job requirements.
+- The user receives suggestions to improve ATS compatibility.
+  
+🛠 Tech Stack: 
+-> Frontend: 
+- HTML
+- CSS
+- JavaScript
+-> Backend:
+- Python
+- Flask
+Other Tools: 
+- NLP libraries for text analysis
+- Resume parsing logic
 
